@@ -54,16 +54,19 @@ neo4j-community:
   existingPasswordSecret: neo4j-secrets
 
 mysql:
-  enabled: true
+  enabled: false
   auth:
     # For better security, add mysql-secrets k8s secret with mysql-root-password, mysql-replication-password and mysql-password
     existingSecret: mysql-secrets
 
 postgresql:
-  enabled: false
+  enabled: true
   auth:
+    enablePostgresUser: true
     # For better security, add postgresql-secrets k8s secret with postgres-password, replication-password and password
     existingSecret: postgresql-secrets
+    # secretKeys:
+    #  postgres-password: postgresPassword
 
 # Using gcloud-proxy requires the node in a GKE cluster to have Cloud SQL Admin scope,
 # you will need to create a new node and migrate the workload if your current node does not have this scope
@@ -112,7 +115,14 @@ cp-helm-charts:
 # Bitnami version of Kafka that deploys open source Kafka https://artifacthub.io/packages/helm/bitnami/kafka
 kafka:
   enabled: true
+  # schema-registry:
+  #   enabled: false
   kraft:
     enabled: false
   zookeeper:
     enabled: true
+  # auth: 
+  #   clientProtocol: sasl
+  #   jaas:
+  #     clientUsers[0]: clientUser
+  #     clientPasswords[0]: clientPassword
