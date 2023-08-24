@@ -93,10 +93,10 @@ gcloud-sqlproxy:
       port: 3306
 
 cp-helm-charts:
-  enabled: false
+  enabled: true
   # Schema registry is under the community license
   cp-schema-registry:
-    enabled: false
+    enabled: true
     kafka:
       bootstrapServers: "prerequisites-kafka:9092"  # <<release-name>>-kafka:9092
   cp-kafka:
